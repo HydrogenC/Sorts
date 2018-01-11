@@ -83,9 +83,9 @@ void output(llong array[], llong n, FuncType sort, int index) {
     cout << "Sorted array: ";
     for (llong i = 0; i < n; i += 1) {
         if (i == n - 1) {
-            cout << array[i];
+            cout << temp[i];
         } else {
-            cout << array[i] << " ";
+            cout << temp[i] << " ";
         }
     }
     cout << endl << "Time used: " << end - begin << endl << endl;
@@ -275,8 +275,8 @@ void radixSort(llong array[], llong n) {
         }
         for (j = 0; j < n; j++) {
             array[j] = tmp[j];
-            radix = radix * 10;
         }
+        radix = radix * 10;
     }
 }
 //Radix Sort Ends
@@ -365,5 +365,6 @@ int main(int argc, char *argv[]) {
         }
     }
     cout << endl << "Time used: " << time << endl;
+    system("pause>nul");
     return 0;
 }
