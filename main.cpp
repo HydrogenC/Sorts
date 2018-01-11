@@ -335,6 +335,6 @@ int main(int argc, char *argv[]) {
         }
     }
     cout << endl << "Time used: " << time << endl;
-    getchar();
+    system("pause>nul");
     return 0;
 }
