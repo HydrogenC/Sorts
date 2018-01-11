@@ -11,13 +11,14 @@ constexpr int getASC(char *p) {
     return (int(p[0]) * 2) + (int(p[1]) * 3);
 }
 
-void inputElements(llong array[], llong n) {
+llong inputElements(llong array[], llong n) {
     cout << "Please input the length of the array: ";
     cin >> n;
     cout << "Please input the elements: " << endl;
     for (llong i = 0; i < n; i += 1) {
         cin >> array[i];
     }
+    return n;
 }
 
 llong getTime(llong array[], llong n, FuncType function) {
@@ -225,8 +226,6 @@ void radixSort(llong array[], llong n) {
             radix = radix * 10;
         }
     }
-    delete[] count;
-    delete[] tmp;
 }
 //Radix Sort Ends
 
@@ -238,7 +237,7 @@ int main(int argc, char *argv[]) {
     switch (argc) {
         case 0:
         case 1:
-            inputElements(m, length);
+            length = inputElements(m, length);
             cout << "1. Bubble Sort" << endl;
             cout << "2. Selection Sort" << endl;
             cout << "3. Insertion Sort" << endl;
@@ -251,28 +250,28 @@ int main(int argc, char *argv[]) {
             break;
         case 2:
             switch (getASC(argv[1])) {
-                case getASC("bubble"):
+                case getASC((char *) "bubble"):
                     index = 1;
                     break;
-                case getASC("select"):
+                case getASC((char *) "select"):
                     index = 2;
                     break;
-                case getASC("insert"):
+                case getASC((char *) "insert"):
                     index = 3;
                     break;
-                case getASC("merge"):
+                case getASC((char *) "merge"):
                     index = 4;
                     break;
-                case getASC("quick"):
+                case getASC((char *) "quick"):
                     index = 5;
                     break;
-                case getASC("heap"):
+                case getASC((char *) "heap"):
                     index = 6;
                     break;
-                case getASC("radix"):
+                case getASC((char *) "radix"):
                     index = 7;
                     break;
-                case getASC("all"):
+                case getASC((char *) "all"):
                     index = 7;
                     break;
                 default:
@@ -280,7 +279,7 @@ int main(int argc, char *argv[]) {
                     getchar();
                     return 0;
             }
-            inputElements(m, length);
+            length = inputElements(m, length);
             break;
         default:
             if (argc > 3) {
@@ -330,12 +329,12 @@ int main(int argc, char *argv[]) {
     cout << "Sorted array: ";
     for (llong i = 0; i < length; i += 1) {
         if (i == length - 1) {
-            cout << m[i] << endl;
+            cout << m[i];
         } else {
             cout << m[i] << " ";
         }
     }
-    cout << "Time used: " << time << endl;
+    cout << endl << "Time used: " << time << endl;
     getchar();
     return 0;
 }
