@@ -38,6 +38,39 @@ const string algorithmNames[9] = {
         "Heap Sort",
         "Radix Sort"
 };
+
+int checkIndex(char *arg) {
+    switch (getASC(arg)) {
+        case getASC((char *) "bubble"):
+            return 1;
+            break;
+        case getASC((char *) "select"):
+            return 2;
+            break;
+        case getASC((char *) "insert"):
+            return 3;
+            break;
+        case getASC((char *) "merge"):
+            return 4;
+            break;
+        case getASC((char *) "quick"):
+            return 5;
+            break;
+        case getASC((char *) "heap"):
+            return 6;
+            break;
+        case getASC((char *) "radix"):
+            return 7;
+            break;
+        case getASC((char *) "all"):
+            return 7;
+            break;
+        default:
+            cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
+            system("pause>nul");
+            return 0;
+    }
+}
 //Main Functions End
 
 //Bubble Sort Begins
@@ -249,39 +282,11 @@ int main(int argc, char *argv[]) {
             cin >> index;
             break;
         case 2:
-            switch (getASC(argv[1])) {
-                case getASC((char *) "bubble"):
-                    index = 1;
-                    break;
-                case getASC((char *) "select"):
-                    index = 2;
-                    break;
-                case getASC((char *) "insert"):
-                    index = 3;
-                    break;
-                case getASC((char *) "merge"):
-                    index = 4;
-                    break;
-                case getASC((char *) "quick"):
-                    index = 5;
-                    break;
-                case getASC((char *) "heap"):
-                    index = 6;
-                    break;
-                case getASC((char *) "radix"):
-                    index = 7;
-                    break;
-                case getASC((char *) "all"):
-                    index = 7;
-                    break;
-                default:
-                    cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
-                    system("pause>nul");
-                    return 0;
-            }
+            index = checkIndex(argv[1]);
             length = inputElements(m, length);
             break;
         default:
+            index = checkIndex(argv[1]);
             if (argc > 3) {
                 length = argc - 2;
                 for (llong i = 0; i < length; i += 1) {
@@ -290,7 +295,7 @@ int main(int argc, char *argv[]) {
             } else {
                 cout << "An error occurred, press any key to exit..." << endl;
                 system("pause>nul");
-                return 0;
+                return -1;
             }
             break;
     }
@@ -322,8 +327,8 @@ int main(int argc, char *argv[]) {
             return 0;
         default:
             cout << "Incorrect input! " << endl;
-            getchar();
-            break;
+            system("pause>nul");
+            return -1;
     }
     cout << "Algorithm name: " << algorithmNames[index - 1] << endl;
     cout << "Sorted array: ";
