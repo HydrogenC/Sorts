@@ -63,14 +63,32 @@ int checkIndex(char *arg) {
             return 7;
             break;
         case getASC((char *) "all"):
-            return 7;
+            return 8;
             break;
         default:
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);
             cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
-            system("pause>nul");
             return 0;
     }
+}
+
+void output(llong array[], llong n, FuncType sort, int index) {
+    llong temp[65536];
+    memcpy(temp, array, 65536);
+    clock_t begin, end;
+    begin = clock();
+    sort(temp, n);
+    end = clock();
+    cout << "Algorithm name: " << algorithmNames[index] << endl;
+    cout << "Sorted array: ";
+    for (llong i = 0; i < n; i += 1) {
+        if (i == n - 1) {
+            cout << array[i];
+        } else {
+            cout << array[i] << " ";
+        }
+    }
+    cout << endl << "Time used: " << end - begin << endl << endl;
 }
 //Main Functions End
 
@@ -294,8 +312,8 @@ int main(int argc, char *argv[]) {
                     m[i] = atol(argv[i + 2]);
                 }
             } else {
-                cout << "An error occurred, press any key to exit..." << endl;
-                system("pause>nul");
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
+                cout << "Unknown error! " << endl;
                 return -1;
             }
             break;
@@ -324,11 +342,17 @@ int main(int argc, char *argv[]) {
             time = getTime(m, length, radixSort);
             break;
         case 8:
-
+            output(m, length, bubbleSort, 0);
+            output(m, length, selectSort, 1);
+            output(m, length, insertSort, 2);
+            output(m, length, mergeSort, 3);
+            output(m, length, quickSort, 4);
+            output(m, length, heapSort, 5);
+            output(m, length, radixSort, 6);
+            system("pause>nul");
             return 0;
         default:
             cout << "Incorrect input! " << endl;
-            system("pause>nul");
             return -1;
     }
     cout << "Algorithm name: " << algorithmNames[index - 1] << endl;
@@ -341,6 +365,5 @@ int main(int argc, char *argv[]) {
         }
     }
     cout << endl << "Time used: " << time << endl;
-    system("pause>nul");
     return 0;
 }
