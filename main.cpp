@@ -8,7 +8,7 @@ typedef void (*FuncType)(llong array[], llong n);
 //Make switch() compatible with string
 constexpr int getASC(char *p) {
     //To prevent conflicts
-    return (int(p[0]) * 2) + (int(p[1]) * 3);
+    return (int(p[0]) * 2) + (int(p[1]) * 3) + (int(p[2]) * 4);
 }
 
 llong inputElements(llong array[], llong n) {
@@ -65,10 +65,14 @@ int checkIndex(char *arg) {
         case getASC((char *) "all"):
             return 8;
             break;
-        default:
+        case getASC((char *) "help"):
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);
-            cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
-            return 0;
+            cout << "csort [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
+            system("pause>nul");
+            exit(0);
+        default:
+            cout << "'csort help' for help! " << endl;
+            return 1;
     }
 }
 
