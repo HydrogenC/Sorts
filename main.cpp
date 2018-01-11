@@ -21,6 +21,16 @@ llong getTime(llong array[], llong n, FuncType function) {
     end = clock();
     return end - begin;
 }
+
+const string algorithmNames[9] = {
+        "Bubble Sort",
+        "Selection Sort",
+        "Insertion Sort",
+        "Merge Sort",
+        "Quick Sort",
+        "Heap Sort",
+        "Radix Sort"
+};
 //Main Functions End
 
 //Bubble Sort Begins
@@ -215,77 +225,112 @@ void radixSort(llong array[], llong n) {
 //Radix Sort Ends
 
 int main(int argc, char *argv[]) {
-    llong length;
-    cout << "Please input the length of the array: ";
-    cin >> length;
-    long long m[length];
-    cout << "Please input the elements: " << endl;
-    inputElement(m, length);
+    llong length = 0;
+    llong time = 0;
+    llong m[65536];
     llong index = 0;
-    if (argc == 2) {
-        if (isSame(argv[1], "bubble")) {
-            index = 1;
-        } else if (isSame(argv[1], "select")) {
-            index = 2;
-        } else if (isSame(argv[1], "insert")) {
-            index = 3;
-        } else if (isSame(argv[1], "merge")) {
-            index = 4;
-        } else if (isSame(argv[1], "quick")) {
-            index = 5;
-        } else if (isSame(argv[1], "heap")) {
-            index = 6;
-        } else if (isSame(argv[1], "radix")) {
-            index = 7;
-        } else if (isSame(argv[1], "all")) {
-            index = 8;
-        } else if (isSame(argv[1], "help")) {
-            cout << "args: bubble, select, shell, insert, merge, quick, heap, radix, all" << endl;
-            getchar();
-            return 0;
-        }
-    } else {
-        cout << "1. Bubble Sort" << endl;
-        cout << "2. Selection Sort" << endl;
-        cout << "3. Insertion Sort" << endl;
-        cout << "4. Merge Sort" << endl;
-        cout << "5. Quick Sort" << endl;
-        cout << "6. Heap Sort" << endl;
-        cout << "7. Radix Sort" << endl;
-        cout << "8. All" << endl;
-        cin >> index;
-    }
-    switch (index) {
+    switch (argc) {
+        case 0:
         case 1:
-            getTime(m, length, bubbleSort);
+            cout << "Please input the length of the array: ";
+            cin >> length;
+            cout << "Please input the elements: " << endl;
+            inputElement(m, length);
+            cout << "1. Bubble Sort" << endl;
+            cout << "2. Selection Sort" << endl;
+            cout << "3. Insertion Sort" << endl;
+            cout << "4. Merge Sort" << endl;
+            cout << "5. Quick Sort" << endl;
+            cout << "6. Heap Sort" << endl;
+            cout << "7. Radix Sort" << endl;
+            cout << "8. All" << endl;
+            cin >> index;
             break;
         case 2:
-            getTime(m, length, selectSort);
+            if (isSame(argv[1], "bubble")) {
+                index = 1;
+            } else if (isSame(argv[1], "select")) {
+                index = 2;
+            } else if (isSame(argv[1], "insert")) {
+                index = 3;
+            } else if (isSame(argv[1], "merge")) {
+                index = 4;
+            } else if (isSame(argv[1], "quick")) {
+                index = 5;
+            } else if (isSame(argv[1], "heap")) {
+                index = 6;
+            } else if (isSame(argv[1], "radix")) {
+                index = 7;
+            } else if (isSame(argv[1], "all")) {
+                index = 8;
+            } else if (isSame(argv[1], "help")) {
+                cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
+                getchar();
+                return 0;
+            } else {
+                cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
+                getchar();
+                return 0;
+            }
+            cout << "Please input the length of the array: ";
+            cin >> length;
+            cout << "Please input the elements: " << endl;
+            inputElement(m, length);
+            break;
+        default:
+            if (argc > 3) {
+                length = argc - 2;
+                for (llong i = 0; i < length; i += 1) {
+                    m[i] = atol(argv[i + 2]);
+                }
+            } else {
+                cout << "An error occurred, press any key to exit..." << endl;
+                getchar();
+                return 0;
+            }
+            break;
+    }
+    cout << endl;
+    switch (index) {
+        case 1:
+            time = getTime(m, length, bubbleSort);
+            break;
+        case 2:
+            time = getTime(m, length, selectSort);
             break;
         case 3:
-            getTime(m, length, insertSort);
+            time = getTime(m, length, insertSort);
             break;
         case 4:
-            getTime(m, length, mergeSort);
+            time = getTime(m, length, mergeSort);
             break;
         case 5:
-            getTime(m, length, quickSort);
+            time = getTime(m, length, quickSort);
             break;
         case 6:
-            getTime(m, length, heapSort);
+            time = getTime(m, length, heapSort);
             break;
         case 7:
-            getTime(m, length, radixSort);
+            time = getTime(m, length, radixSort);
             break;
+        case 8:
+
+            return 0;
         default:
             cout << "Incorrect input! " << endl;
             getchar();
             break;
     }
+    cout << "Algorithm name: " << algorithmNames[index - 1] << endl;
+    cout << "Sorted array: ";
     for (llong i = 0; i < length; i += 1) {
-        cout << m[i] << " ";
+        if (i == length - 1) {
+            cout << m[i] << endl;
+        } else {
+            cout << m[i] << " ";
+        }
     }
+    cout << "Time used: " << time << endl;
     getchar();
-    system("pause>nul");
     return 0;
 }
