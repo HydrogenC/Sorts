@@ -1,17 +1,23 @@
-#include <ctime>
 #include "main.h"
+
+using namespace std;
 
 //Main Functions Begin
 typedef void (*FuncType)(llong array[], llong n);
 
-void inputElement(llong in[], llong length) {
-    for (llong i = 0; i < length; i += 1) {
-        cin >> in[i];
-    }
+//Make switch() compatible with string
+constexpr int getASC(char *p) {
+    //To prevent conflicts
+    return (int(p[0]) * 2) + (int(p[1]) * 3);
 }
 
-bool isSame(char *a, const string b) {
-    return (strcmp(a, b.data() + '\0') == 0);
+void inputElements(llong array[], llong n) {
+    cout << "Please input the length of the array: ";
+    cin >> n;
+    cout << "Please input the elements: " << endl;
+    for (llong i = 0; i < n; i += 1) {
+        cin >> array[i];
+    }
 }
 
 llong getTime(llong array[], llong n, FuncType function) {
@@ -232,10 +238,7 @@ int main(int argc, char *argv[]) {
     switch (argc) {
         case 0:
         case 1:
-            cout << "Please input the length of the array: ";
-            cin >> length;
-            cout << "Please input the elements: " << endl;
-            inputElement(m, length);
+            inputElements(m, length);
             cout << "1. Bubble Sort" << endl;
             cout << "2. Selection Sort" << endl;
             cout << "3. Insertion Sort" << endl;
@@ -247,35 +250,37 @@ int main(int argc, char *argv[]) {
             cin >> index;
             break;
         case 2:
-            if (isSame(argv[1], "bubble")) {
-                index = 1;
-            } else if (isSame(argv[1], "select")) {
-                index = 2;
-            } else if (isSame(argv[1], "insert")) {
-                index = 3;
-            } else if (isSame(argv[1], "merge")) {
-                index = 4;
-            } else if (isSame(argv[1], "quick")) {
-                index = 5;
-            } else if (isSame(argv[1], "heap")) {
-                index = 6;
-            } else if (isSame(argv[1], "radix")) {
-                index = 7;
-            } else if (isSame(argv[1], "all")) {
-                index = 8;
-            } else if (isSame(argv[1], "help")) {
-                cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
-                getchar();
-                return 0;
-            } else {
-                cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
-                getchar();
-                return 0;
+            switch (getASC(argv[1])) {
+                case getASC("bubble"):
+                    index = 1;
+                    break;
+                case getASC("select"):
+                    index = 2;
+                    break;
+                case getASC("insert"):
+                    index = 3;
+                    break;
+                case getASC("merge"):
+                    index = 4;
+                    break;
+                case getASC("quick"):
+                    index = 5;
+                    break;
+                case getASC("heap"):
+                    index = 6;
+                    break;
+                case getASC("radix"):
+                    index = 7;
+                    break;
+                case getASC("all"):
+                    index = 7;
+                    break;
+                default:
+                    cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
+                    getchar();
+                    return 0;
             }
-            cout << "Please input the length of the array: ";
-            cin >> length;
-            cout << "Please input the elements: " << endl;
-            inputElement(m, length);
+            inputElements(m, length);
             break;
         default:
             if (argc > 3) {

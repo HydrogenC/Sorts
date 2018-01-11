@@ -6,6 +6,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
+#include <ctime>
 
 #define llong long long
 
@@ -13,5 +14,3 @@
 #define SORTS_MAIN_H
 
 #endif //SORTS_MAIN_H
-
-using namespace std;
