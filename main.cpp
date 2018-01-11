@@ -66,6 +66,7 @@ int checkIndex(char *arg) {
             return 7;
             break;
         default:
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN);
             cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
             system("pause>nul");
             return 0;

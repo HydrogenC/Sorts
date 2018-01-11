@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>
+#include <windows.h>
 
 #define llong long long
 
