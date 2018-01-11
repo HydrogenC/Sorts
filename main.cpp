@@ -276,7 +276,7 @@ int main(int argc, char *argv[]) {
                     break;
                 default:
                     cout << "sort.exe [bubble, select, insert, merge, quick, heap, radix, all] [elements]" << endl;
-                    getchar();
+                    system("pause>nul");
                     return 0;
             }
             length = inputElements(m, length);
@@ -289,7 +289,7 @@ int main(int argc, char *argv[]) {
                 }
             } else {
                 cout << "An error occurred, press any key to exit..." << endl;
-                getchar();
+                system("pause>nul");
                 return 0;
             }
             break;
