@@ -11,14 +11,21 @@ constexpr int getASC(char *p) {
     return (int(p[0]) * 2) + (int(p[1]) * 3) + (int(p[2]) * 4);
 }
 
-llong inputElements(llong array[], llong n) {
+llong inputElements(llong array[]) {
     cout << "Please input the length of the array: ";
+    llong n;
     cin >> n;
     cout << "Please input the elements: " << endl;
     for (llong i = 0; i < n; i += 1) {
         cin >> array[i];
     }
     return n;
+}
+void inputElements(llong array[],llong n) {
+    cout << "Please input the elements: " << endl;
+    for (llong i = 0; i < n; i += 1) {
+        cin >> array[i];
+    }
 }
 
 llong getTime(llong array[], llong n, FuncType function) {
@@ -288,12 +295,12 @@ void radixSort(llong array[], llong n) {
 int main(int argc, char *argv[]) {
     llong length = 0;
     llong time = 0;
-    llong m[65536];
+    llong arr[65536];
     llong index = 0;
     switch (argc) {
         case 0:
         case 1:
-            length = inputElements(m, length);
+            length = inputElements(arr);
             cout << "1. Bubble Sort" << endl;
             cout << "2. Selection Sort" << endl;
             cout << "3. Insertion Sort" << endl;
@@ -306,18 +313,24 @@ int main(int argc, char *argv[]) {
             break;
         case 2:
             index = checkIndex(argv[1]);
-            length = inputElements(m, length);
+            length = inputElements(arr);
+            break;
+        case 3:
+            index=checkIndex(argv[1]);
+            length=atoll(argv[2]);
+            inputElements(arr,length);
             break;
         default:
             index = checkIndex(argv[1]);
             if (argc > 3) {
                 length = argc - 2;
                 for (llong i = 0; i < length; i += 1) {
-                    m[i] = atol(argv[i + 2]);
+                    arr[i] = atoll(argv[i + 2]);
                 }
             } else {
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
                 cout << "Unknown error! " << endl;
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_GREEN);
                 return -1;
             }
             break;
@@ -325,34 +338,34 @@ int main(int argc, char *argv[]) {
     cout << endl;
     switch (index) {
         case 1:
-            time = getTime(m, length, bubbleSort);
+            time = getTime(arr, length, bubbleSort);
             break;
         case 2:
-            time = getTime(m, length, selectSort);
+            time = getTime(arr, length, selectSort);
             break;
         case 3:
-            time = getTime(m, length, insertSort);
+            time = getTime(arr, length, insertSort);
             break;
         case 4:
-            time = getTime(m, length, mergeSort);
+            time = getTime(arr, length, mergeSort);
             break;
         case 5:
-            time = getTime(m, length, quickSort);
+            time = getTime(arr, length, quickSort);
             break;
         case 6:
-            time = getTime(m, length, heapSort);
+            time = getTime(arr, length, heapSort);
             break;
         case 7:
-            time = getTime(m, length, radixSort);
+            time = getTime(arr, length, radixSort);
             break;
         case 8:
-            output(m, length, bubbleSort, 0);
-            output(m, length, selectSort, 1);
-            output(m, length, insertSort, 2);
-            output(m, length, mergeSort, 3);
-            output(m, length, quickSort, 4);
-            output(m, length, heapSort, 5);
-            output(m, length, radixSort, 6);
+            output(arr, length, bubbleSort, 0);
+            output(arr, length, selectSort, 1);
+            output(arr, length, insertSort, 2);
+            output(arr, length, mergeSort, 3);
+            output(arr, length, quickSort, 4);
+            output(arr, length, heapSort, 5);
+            output(arr, length, radixSort, 6);
             system("pause>nul");
             return 0;
         default:
@@ -363,9 +376,9 @@ int main(int argc, char *argv[]) {
     cout << "Sorted array: ";
     for (llong i = 0; i < length; i += 1) {
         if (i == length - 1) {
-            cout << m[i];
+            cout << arr[i];
         } else {
-            cout << m[i] << " ";
+            cout << arr[i] << " ";
         }
     }
     cout << endl << "Time used: " << time << endl;
