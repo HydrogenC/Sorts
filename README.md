@@ -12,5 +12,5 @@
 * Radix Sort
 
 ### Credits
-* HydrogenC (Lead Developer)
-* UraniumH (Programmer)
+* HydrogenC (Group Leader & Lead Developer)
+* UraniumH (Programmer & Algorithm Writer)
